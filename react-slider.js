@@ -15,7 +15,7 @@
   function pauseEvent(e) {
     if (e.stopPropagation) e.stopPropagation();
     if (e.preventDefault) e.preventDefault();
-    e.persist();
+    if (e.persist) e.persist();
     e.cancelBubble = true;
     e.returnValue = false;
     return false;
