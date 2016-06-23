@@ -215,7 +215,8 @@
         upperBound: 0,
         sliderLength: 0,
         value: value,
-        zIndices: zIndices
+        zIndices: zIndices,
+        onTrackEnd: false
       };
     },
 
@@ -568,6 +569,14 @@
       if (newValue !== oldValue) {
         this.setState({value: value}, this._fireChangeEvent.bind(this, 'onChange'));
       }
+
+
+      if (value[length-1] === props.max) {
+        this.setState({ onTrackEnd: true });
+      }
+      else {
+        this.setState({ onTrackEnd: false });
+      }
     },
 
     _pushSucceeding: function (value, minDistance, index) {
@@ -778,7 +787,7 @@
         React.createElement('div', {
             ref: 'slider',
             style: {position: 'relative'},
-            className: props.className + (props.disabled ? ' disabled' : ''),
+            className: props.className + (props.disabled ? ' disabled' : '') + (this.state.onTrackEnd ? ' u-slider--max' : ''),
             onMouseDown: this._onSliderMouseDown,
             onClick: this._onSliderClick
           },
