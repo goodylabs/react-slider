@@ -216,7 +216,7 @@
         sliderLength: 0,
         value: value,
         zIndices: zIndices,
-        onTrackEnd: false
+        onTrackEnd: value[value.length - 1] === this.props.max
       };
     },
 
