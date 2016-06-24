@@ -571,17 +571,10 @@
         this.setState({value: value}, this._fireChangeEvent.bind(this, 'onChange'));
       }
 
-
-      if (value[length-1] === props.max) {
-        this.setState({ onTrackEnd: true });
-      }
-      else {
-        this.setState({ onTrackEnd: false });
-      }
-
-      if (value[0] === props.min) {
-        this.setState({ onTrackStart: true });
-      }
+      this.setState({
+        onTrackStart: value[0] === props.min,
+        onTrackEnd: value[length-1] === props.max
+      });
     },
 
     _pushSucceeding: function (value, minDistance, index) {
