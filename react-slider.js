@@ -216,7 +216,8 @@
         sliderLength: 0,
         value: value,
         zIndices: zIndices,
-        onTrackEnd: value[value.length - 1] === this.props.max
+        onTrackEnd: value[value.length - 1] === this.props.max,
+        onTrackStart: value[0] === this.props.min
       };
     },
 
@@ -577,6 +578,10 @@
       else {
         this.setState({ onTrackEnd: false });
       }
+
+      if (value[0] === props.min) {
+        this.setState({ onTrackStart: true });
+      }
     },
 
     _pushSucceeding: function (value, minDistance, index) {
@@ -787,7 +792,7 @@
         React.createElement('div', {
             ref: 'slider',
             style: {position: 'relative'},
-            className: props.className + (props.disabled ? ' disabled' : '') + (this.state.onTrackEnd ? ' u-slider--max' : ''),
+            className: props.className + (props.disabled ? ' disabled' : '') + (this.state.onTrackEnd ? ' u-slider--max' : '') + (this.state.onTrackStart ? ' u-slider--min' : ''),
             onMouseDown: this._onSliderMouseDown,
             onClick: this._onSliderClick
           },
